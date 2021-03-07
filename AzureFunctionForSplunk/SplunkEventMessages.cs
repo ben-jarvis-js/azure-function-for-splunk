@@ -84,11 +84,11 @@ namespace AzureFunctionForSplunk
             splunkEventMessages = new List<string>();
             foreach (var item in azureMonitorMessages)
             {
-                string itemactual = item.GetSplunkEventFromMessage();
-                JObject data = JObject.Parse(itemactual); 
-                string dataout = data["event"]["properties"];//.ToString();
-                splunkEventMessages.Add(dataout);
-                //splunkEventMessages.Add(item.GetSplunkEventFromMessage());
+                //string itemactual = item.GetSplunkEventFromMessage();
+                //JObject data = JObject.Parse(itemactual); 
+                //string dataout = data["event"]["properties"].ToString();
+                //splunkEventMessages.Add(dataout);
+                splunkEventMessages.Add(item.GetSplunkEventFromMessage());
             }
 
             switch (outputBinding)
