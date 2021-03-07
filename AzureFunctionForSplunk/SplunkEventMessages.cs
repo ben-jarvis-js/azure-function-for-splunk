@@ -86,7 +86,7 @@ namespace AzureFunctionForSplunk
             {
                 string itemactual = item.GetSplunkEventFromMessage();
                 JObject data = JObject.Parse(itemactual); 
-                string dataout = data["event"]["properties"];//.ToString();
+                JObject dataout = data["event"]["properties"];//.ToString();
                 //splunkEventMessages.Add(dataout);
                 //splunkEventMessages.Add(item.GetSplunkEventFromMessage());
             }
