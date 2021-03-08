@@ -67,7 +67,7 @@ namespace AzureFunctionForSplunk
         }
 
         public List<AzMonMessage> azureMonitorMessages { get; set; }
-        public List<JObject> splunkEventMessages { get; set; }
+        public List<string> splunkEventMessages { get; set; }
         public IAsyncCollector<string> eventHubOutputEvents { get; set; }
 
         public abstract void Ingest(string[] records);
@@ -81,13 +81,13 @@ namespace AzureFunctionForSplunk
                 return;
             }
 
-            splunkEventMessages = new List<JObject>();
+            splunkEventMessages = new List<string>();
             foreach (var item in azureMonitorMessages)
             {
                 string itemactual = item.GetSplunkEventFromMessage();
                 JObject data = JObject.Parse(itemactual); 
-                JObject dataout = data["event"]["properties"];//.ToString();
-                //splunkEventMessages.Add(dataout);
+                string dataout = data["event"]["properties"].ToString();
+                splunkEventMessages.Add(dataout);
                 //splunkEventMessages.Add(item.GetSplunkEventFromMessage());
             }
 
